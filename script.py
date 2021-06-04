@@ -7,8 +7,7 @@ print(currentMouseX, currentMouseY);
 
 def load_game():
     pyautogui.doubleClick(311, 189) # load game from main menu, location might change depending on how many apps are installed
-    time.sleep(20) # wait for game to load
-    print('Game loaded')
+    time.sleep(10) # wait for game to load
     pyautogui.click(1172, 596) # I am a new player!
     time.sleep(1)
     pyautogui.click(1048, 771) # Terms of service
@@ -21,7 +20,6 @@ def load_game():
     time.sleep(1)
     # pyautogui.click(x, y) # county placement depends where to spawn
     pyautogui.click(1008, 614) # place village
-
     pyautogui.move(515, 12) # now we just exit 
     time.sleep(1)
     pyautogui.click(515, 12)    
@@ -45,4 +43,4 @@ def clear_cache():
     pyautogui.click(515, 13) # back to main menu
     load_game()
 
-#clear_cache()
+clear_cache()
