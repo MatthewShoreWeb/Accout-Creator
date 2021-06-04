@@ -5,11 +5,6 @@ screenWidth, screenHeight = pyautogui.size();
 currentMouseX, currentMouseY = pyautogui.position();
 print(currentMouseX, currentMouseY);
 
-loaded = 'false';
-
-
-
-
 def load_game():
     pyautogui.click(888, 623); # Swap world
     time.sleep(5);
