@@ -6,27 +6,30 @@ import random
 currentMouseX, currentMouseY = pyautogui.position()
 print(currentMouseX, currentMouseY)
 
-sell = ["apples", "wood", "venison", "stone", "cheese", "meat", "iron", "pitch", "vegetables"]
+village_count = 19
+
+sell = ["apples", "wood", "venison", "stone",
+        "cheese", "meat", "iron", "pitch", "vegetables"]
 # First array in each is the highest price, second is the lowest price.
 sell_coordinates = {"firstRow": [[1040, 505], [1075, 505]], "secondRow": [[1040, 545], [1075, 545]], "thirdRow": [[1040, 585], [1075, 585]], "fourthRow": [[1040, 625], [
     1075, 625]], "fifthRow": [[1040, 665], [1075, 665]], "sixthRow": [[1040, 705], [1075, 705]], "seventhRow": [[1040, 745], [1075, 745]], "eighthRow": [[1040, 785], [1075, 785]]}
 
 
 def getRandom():
-    # Random float between 0 and 2.
     return random.random() * 2
 
 
 def move_and_click(x, y):
-    mouse.move(x, y, multiplier=(getRandom() * 10))
+    mouse.move(x, y, multiplier=(getRandom() * 20))
     time.sleep(getRandom())
     pyautogui.click(x, y)
     time.sleep(getRandom())
 
 
-def next_village():
+def next_village(sold_count):
     move_and_click(1485, 60)
-    auto_trade("false")
+    sold_count += 1
+    auto_trade("false", sold_count)
 
 
 def to_trade_screen():
@@ -82,10 +85,14 @@ def sell_item(item):
     sell_button()
 
 
-def auto_trade(start):
+def auto_trade(start, sold_count):
+    print("Sold Count: " + str(sold_count))
     if start == "true":
         to_trade_screen()
     to_sell = sell[random.randrange(len(sell))]
+    if sold_count == village_count:
+        time.sleep(240)
+        sold_count = 0
     if to_sell == "wood" or to_sell == "stone" or to_sell == "iron" or to_sell == "pitch":
         move_and_click(527, 392)
     elif to_sell == "apples" or to_sell == "cheese" or to_sell == "meat" or to_sell == "vegetables" or to_sell == "fish" or to_sell == "ale":
@@ -93,7 +100,7 @@ def auto_trade(start):
     else:
         move_and_click(765, 398)
     sell_item(to_sell)
-    next_village()
+    next_village(sold_count)
 
 
-auto_trade("true")
+auto_trade("true", 0)
