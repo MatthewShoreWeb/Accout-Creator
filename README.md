@@ -1,4 +1,4 @@
-# SHK_Bot
+# SHK_Bot 
 
 A python based bot which makes performing in game actions easier and less grind intensive. Uses pyAutoGui for the UI interactions. 
 
